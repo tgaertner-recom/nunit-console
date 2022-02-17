@@ -64,6 +64,7 @@ jobs:
   #     ArtifactName: Package
 
 - job: Linux
+  dependsOn: Windows
   condition: not(or(startsWith(variables['Build.SourceBranchName'], 'azure-windows-'),startsWith(variables['Build.SourceBranchName'], 'azure-macOS-')))
   pool:
     vmImage: ubuntu-20.04
@@ -113,6 +114,7 @@ jobs:
     condition: succeededOrFailed()
 
 - job: macOS
+  dependsOn: Linux
   condition: not(or(startsWith(variables['Build.SourceBranchName'], 'azure-windows-'),startsWith(variables['Build.SourceBranchName'], 'azure-linux-')))
   pool:
     vmImage: macOS-11
